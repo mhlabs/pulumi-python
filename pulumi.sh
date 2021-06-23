@@ -6,7 +6,7 @@ set -e -x
 # Download and install required tools.
 # pulumi
 curl -L https://get.pulumi.com/ | sh -s -- --version ${PULUMI_VERSION}
-export PATH=${PATH}:/root/.pulumi/bin
+export PATH=$PATH:$HOME/.pulumi/bin
 
 cd ${WORKING_DIRECTORY}
 
