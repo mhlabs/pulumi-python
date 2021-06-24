@@ -10,7 +10,7 @@ export PATH=$PATH:$HOME/.pulumi/bin
 
 cd ${WORKING_DIRECTORY}
 
-# Restore npm dependencies for our infra app.
+# Restore dependencies
 python -m pip install -r requirements.txt
 
 # Login into pulumi. This will require the PULUMI_ACCESS_TOKEN environment variable.
