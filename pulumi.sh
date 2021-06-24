@@ -11,7 +11,8 @@ export PATH=$PATH:$HOME/.pulumi/bin
 cd ${WORKING_DIRECTORY}
 
 # Restore dependencies
-python -m pip install -r requirements.txt
+python -m venv venv
+venv/bin/pip install -r requirements.txt
 
 # Login into pulumi. This will require the PULUMI_ACCESS_TOKEN environment variable.
 pulumi login
