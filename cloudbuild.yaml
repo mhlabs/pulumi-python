@@ -1,3 +1,4 @@
+# gcloud builds submit .
 steps:
 - name: 'python:3.8-buster'
   entrypoint: /bin/sh
