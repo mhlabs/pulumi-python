@@ -1,0 +1,33 @@
+steps:
+- name: 'python:3.8-buster'
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - 'chmod +x *.sh && ./pulumi.sh'
+  env:
+  - 'BUILD_TYPE=$_BUILD_TYPE'
+  - 'PULUMI_VERSION=$_PULUMI_VERSION'
+  - 'PULUMI_STACK=$_PULUMI_STACK'
+  - 'GOOGLE_PROJECT=$PROJECT_ID'
+  - 'GOOGLE_REGION=$_GOOGLE_REGION'
+  - 'GOOGLE_ZONE=$_GOOGLE_ZONE'
+  - 'GOOGLE_KEY_RING=$_GOOGLE_KEY_RING'
+  - 'GOOGLE_CRYPTO_KEY=$_GOOGLE_CRYPTO_KEY'
+  - 'WORKING_DIRECTORY=$_WORKING_DIRECTORY'
+  secretEnv: ['PULUMI_ACCESS_TOKEN']
+availableSecrets:
+  secretManager:
+    # Store your pulumi access token in gcp secrets with the key pulumi-access-token
+  - versionName: projects/${PROJECT_ID}/secrets/pulumi-access-token/versions/latest
+    env: 'PULUMI_ACCESS_TOKEN'
+tags: ['pulumi-gitops']
+substitutions:
+  _PULUMI_STACK: 'orgName/projectName/stackName'
+  _PULUMI_VERSION: '3.5.1'
+  _GOOGLE_REGION: 'europe-west1'
+  _GOOGLE_ZONE: 'europe-west1-b'
+  # Set up a key in GCP KMS to encrypt secrets in Pulumi
+  _GOOGLE_KEY_RING: 'datahem'
+  _GOOGLE_CRYPTO_KEY: 'pulumi'
+  _BUILD_TYPE: 'preview'
+  _WORKING_DIRECTORY: '.'
